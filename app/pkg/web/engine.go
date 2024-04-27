@@ -24,12 +24,14 @@ import (
 
 // fonts.gstatic.com and fonts.googleapis.com are required for Custom CSS to work with Google Fonts
 // unsafe-inline on Style is required for rendering Tags on SSR
+//cspStyle   = "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://*.paddle.com %[2]s"
+//cspScript  = "script-src 'self' 'nonce-%[1]s' https://www.google-analytics.com https://*.paddle.com %[2]s"
 
 var (
 	cspBase    = "base-uri 'self'"
 	cspDefault = "default-src 'self'"
-	cspStyle   = "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://*.paddle.com %[2]s"
-	cspScript  = "script-src 'self' 'nonce-%[1]s' https://www.google-analytics.com https://*.paddle.com %[2]s"
+	cspStyle = "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://*.paddle.com %[2]s https://gladiatorwars-fider.herokuapp.com"
+	cspScript = "script-src 'self' 'nonce-%[1]s' https://www.google-analytics.com https://*.paddle.com %[2]s https://gladiatorwars-fider.herokuapp.com"
 	cspFont    = "font-src 'self' https://fonts.gstatic.com data: %[2]s"
 	cspImage   = "img-src 'self' https: data: %[2]s"
 	cspObject  = "object-src 'none'"
