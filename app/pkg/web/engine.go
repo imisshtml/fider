@@ -330,6 +330,7 @@ func (g *Group) Static(prefix, root string) {
 				return nil
 			}
 			c.Response.Header().Set("Cache-Control", "no-cache, no-store")
+			c.Response.Header().Set("Access-Control-Allow-Origin", "*")
 			return c.NotFound()
 		}
 	} else {
