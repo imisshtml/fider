@@ -72,6 +72,24 @@ type Engine struct {
 	cache         *cache.Cache
 }
 
+// CORS middleware function
+func CORS(next HandlerFunc) HandlerFunc {
+	return func(c *Context) error {
+			c.Response.Header().Set("Access-Control-Allow-Origin", "*") // Adjust in production
+			c.Response.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE")
+			c.Response.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
+
+			// Check if it's a preflight request
+			if c.Request.Method == "OPTIONS" {
+					c.Response.WriteHeader(http.StatusOK)
+					return nil // Stop further processing of the preflight request
+			}
+
+			return next(c) // Proceed with the next middleware or actual handler
+	}
+}
+
+
 // New creates a new Engine
 func New() *Engine {
 	ctx := context.Background()
@@ -92,6 +110,8 @@ func New() *Engine {
 		worker:      worker.New(),
 		cache:       cache.New(5*time.Minute, 10*time.Minute),
 	}
+
+	router.Use(CORS)
 
 	return router
 }
