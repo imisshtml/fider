@@ -73,7 +73,7 @@ type Engine struct {
 }
 
 // CORS middleware function
-func CORS(next HandlerFunc) HandlerFunc {
+func CORSs(next HandlerFunc) HandlerFunc {
 	return func(c *Context) error {
 			c.Response.Header().Set("Access-Control-Allow-Origin", "*") // Adjust in production
 			c.Response.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE")
@@ -111,7 +111,7 @@ func New() *Engine {
 		cache:       cache.New(5*time.Minute, 10*time.Minute),
 	}
 
-	router.Use(CORS)
+	router.Use(middleware.CORS)
 
 	return router
 }
