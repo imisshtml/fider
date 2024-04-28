@@ -111,7 +111,7 @@ func New() *Engine {
 		cache:       cache.New(5*time.Minute, 10*time.Minute),
 	}
 
-	router.Use(middleware.CORS)
+	//router.Use(middleware.CORS)
 
 	return router
 }
